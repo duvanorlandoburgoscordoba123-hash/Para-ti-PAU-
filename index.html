@@ -25,6 +25,8 @@ overflow:hidden;
 background:black;
 }
 
+/* VIDEO */
+
 video{
 position:fixed;
 width:100%;
@@ -45,8 +47,8 @@ z-index:-2;
 /* CELULAR */
 
 .phone{
-width:360px;
-height:720px;
+width:320px;
+height:650px;
 background:#111b21;
 border-radius:40px;
 overflow:hidden;
@@ -131,19 +133,20 @@ align-self:flex-end;
 /* BOTON */
 
 .nextBtn{
-position:absolute;
-bottom:25px;
-right:20px;
-width:58px;
-height:58px;
+position:fixed;
+bottom:35px;
+right:30px;
+width:65px;
+height:65px;
 border:none;
 border-radius:50%;
 background:#00a884;
 color:white;
-font-size:24px;
+font-size:28px;
 cursor:pointer;
-box-shadow:0 0 20px rgba(0,0,0,0.4);
+box-shadow:0 0 25px rgba(0,0,0,0.5);
 transition:0.3s;
+z-index:10;
 }
 
 .nextBtn:hover{
@@ -196,13 +199,15 @@ Hola Paula ✨
 
 </div>
 
-<button class="nextBtn" onclick="nextMessage()">
-➜
-</button>
-
 </div>
 
+<button class="nextBtn" onclick="nextMessage()">
+➤
+</button>
+
 <script>
+
+/* ACTIVAR SONIDO */
 
 const video = document.getElementById('video');
 
@@ -212,6 +217,8 @@ video.muted = false;
 video.play();
 
 }, { once:true });
+
+/* MENSAJES */
 
 const mensajes = [
 
