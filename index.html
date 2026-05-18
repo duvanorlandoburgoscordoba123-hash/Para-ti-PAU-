@@ -2,157 +2,160 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Chat animado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Paula ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family: Arial, Helvetica, sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:black;overflow:hidden}
 
-body{
-    background: linear-gradient(135deg,#0f172a,#1e293b);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+/* VIDEO */
+video{position:fixed;width:100%;height:100%;object-fit:cover;filter:brightness(.28);z-index:-3;}
+.overlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:-2;}
 
-/* CONTENEDOR CHAT */
-.chat-container{
-    width:340px;
-    height:520px;
-    background:#111827;
-    border-radius:25px;
-    padding:20px;
-    box-shadow:0 0 30px rgba(0,0,0,.6);
-    overflow:hidden;
-}
+/* INICIO */
+.start{position:fixed;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;background:black;color:white;z-index:100;cursor:pointer;text-align:center;}
+.start h1{font-size:34px;margin-bottom:20px}
+.start p{opacity:.7}
 
-.chat{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
+/* PHONE */
+.phone{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:270px;height:540px;background:#111b21ee;border-radius:38px;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,.6);display:none;}
+.header{height:70px;background:#202c33;display:flex;align-items:center;padding:18px;padding-top:28px;gap:10px;color:white;}
+.avatar{width:40px;height:40px;border-radius:50%;background:url('image.png');background-size:cover;background-position:center;border:2px solid rgba(255,255,255,.2);}
+.chat{height:calc(100% - 70px);padding:15px;overflow-y:auto;display:flex;flex-direction:column;}
+.message{padding:12px 14px;border-radius:16px;margin-top:10px;max-width:82%;color:white;font-size:12px;}
+.received{background:#202c33;align-self:flex-start;}
+.sent{background:#005c4b;align-self:flex-end;}
+.time{font-size:9px;opacity:.6;margin-top:4px;text-align:right;}
 
-/* BURBUJAS */
-.bubble{
-    padding:12px 16px;
-    border-radius:18px;
-    width:max-content;
-    max-width:80%;
-    opacity:0;
-    transform:translateY(30px);
-    animation:aparecer .6s forwards;
-    
-    /* 🔥 evita espacios raros entre letras */
-    letter-spacing: normal;
-    word-spacing: normal;
-    white-space: normal;
-}
+.nextBtn{position:fixed;bottom:40px;right:40px;width:60px;height:60px;border:none;border-radius:50%;background:#00a884;color:white;font-size:24px;cursor:pointer;display:none;z-index:20;}
 
-.yo{
-    background:#22c55e;
-    color:white;
-    align-self:flex-end;
-}
+/* FINAL */
+.final{position:fixed;width:100%;height:100%;background:black;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transition:2s;pointer-events:none;z-index:50;text-align:center;}
+.final.show{opacity:1;pointer-events:auto;}
+.final img{width:260px;border-radius:25px;box-shadow:0 0 40px rgba(255,255,255,.2);margin-bottom:30px;}
+.bigText{color:white;font-size:28px;max-width:500px;line-height:1.5;margin-bottom:30px;}
 
-.otro{
-    background:#374151;
-    color:white;
-    align-self:flex-start;
-}
-
-@keyframes aparecer{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* corazon final */
-.corazon{
-    font-size:40px;
-    text-align:center;
-    opacity:0;
-    animation:latido 1s infinite;
-    margin-top:10px;
-}
-
-@keyframes latido{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.2)}
-    100%{transform:scale(1)}
-}
+.btnLove{padding:14px 28px;margin:10px;border:none;border-radius:30px;font-size:18px;cursor:pointer;background:#ff4d6d;color:white;}
+.heart{position:absolute;color:#ff4d6d;font-size:22px;animation:float 6s linear infinite;}
+@keyframes float{from{transform:translateY(100vh);}to{transform:translateY(-10vh);opacity:0;}}
 </style>
 </head>
 
 <body>
 
-<div class="chat-container">
-    <div class="chat" id="chat"></div>
-    <div class="corazon" id="heart">❤️</div>
+<video id="video" autoplay muted loop>
+<source src="video.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<audio id="music" loop><source src="music.mp3"></audio>
+<audio id="msgSound"><source src="msg.mp3"></audio>
+
+<div class="start" onclick="startApp()">
+<h1>Oye bonita ✨</h1>
+<p>Toca la pantalla… prometo devolverte algo bonito ❤️</p>
+</div>
+
+<div class="phone" id="phone">
+<div class="header"><div class="avatar"></div><div>Paula ❤️</div></div>
+<div class="chat" id="chat"></div>
+</div>
+
+<button class="nextBtn" id="btn" onclick="nextMessage()">➜</button>
+
+<div class="final" id="final">
+<img src="image.png">
+<div class="bigText" id="finalText"></div>
+<button class="btnLove" onclick="alert('Sabía que dirías que sí ❤️')">SI ❤️</button>
+<button class="btnLove" onclick="alert('Sabía que dirías que sí ❤️')">OBVIO SI 😏</button>
 </div>
 
 <script>
-const chat = document.getElementById("chat");
+const mensajes=[
+"Quería decirte algo... ❤️",
+"No sabía muy bien cómo hacerlo.",
+"Así que preferí crear este pequeño lugar para ti ✨",
+"Porque hay personas que llegan normal...",
+"y poco a poco se vuelven especiales 🌙",
+"Y honestamente...",
+"creo que contigo me pasó eso ❤️",
+"Me gusta hablar contigo.",
+"Me gusta cuando apareces en mi pantalla ✨",
+"Y la tranquilidad que transmites.",
+"Solo quería que supieras...",
+"que alguien aquí te piensa bonito 🌹"
+];
 
-function crearBurbuja(tipo){
-    const div = document.createElement("div");
-    div.className = "bubble " + tipo;
-    chat.appendChild(div);
-    return div;
+let index=0;
+const msgSound=document.getElementById("msgSound");
+
+function startApp(){
+document.querySelector('.start').style.display='none';
+phone.style.display='block';
+btn.style.display='block';
+video.muted=false;
+music.play();
 }
 
-function escribirTexto(elemento, texto, velocidad){
-    let i = 0;
-    function escribir(){
-        if(i < texto.length){
-            elemento.innerHTML += texto.charAt(i);
-            i++;
-            setTimeout(escribir, velocidad);
-        }
-    }
-    escribir();
+function escribirMensaje(texto, elemento, i=0){
+if(i<texto.length){
+elemento.innerHTML+=texto.charAt(i);
+setTimeout(()=>escribirMensaje(texto,elemento,i+1),30);
+}
 }
 
-/* SECUENCIA DE MENSAJES */
-setTimeout(()=>{
-    let b1 = crearBurbuja("otro");
-    escribirTexto(b1,"Hola 😊",40);
-},500);
+function nextMessage(){
+if(index<mensajes.length){
+let div=document.createElement('div');
+div.classList.add('message');
+index%2==0?div.classList.add('sent'):div.classList.add('received');
+chat.appendChild(div);
+msgSound.play();
+escribirMensaje(mensajes[index],div);
+
+let hora=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+let t=document.createElement("div");
+t.className="time";
+t.innerHTML=hora;
+div.appendChild(t);
+
+chat.scrollTop=chat.scrollHeight;
+index++;
+}else{
+btn.style.display='none';
+final.classList.add('show');
 
 setTimeout(()=>{
-    let b2 = crearBurbuja("yo");
-    escribirTexto(b2,"Hola 😍",40);
-},2000);
+finalText.innerHTML="Desde que llegaste todo se siente más bonito ❤️<br><br>¿Te gustaría salir conmigo? 🌹";
+},3000);
 
-setTimeout(()=>{
-    let b3 = crearBurbuja("otro");
-    escribirTexto(b3,"¿Me dices algo lindo?",40);
-},3500);
+for(let i=0;i<40;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*4)+"s";
+document.body.appendChild(h);
+}
+}
+}
 
-setTimeout(()=>{
-    let b4 = crearBurbuja("yo");
-    escribirTexto(b4,"Si, un poema lindo",40);
-},5500);
-
-setTimeout(()=>{
-    let b5 = crearBurbuja("otro");
-    escribirTexto(b5,"Obvio, sí otro más lindo",40);
-},7500);
-
-setTimeout(()=>{
-    let b6 = crearBurbuja("yo");
-    escribirTexto(b6,"Eres lo más bonito que me ha pasado 💕",40);
-},9500);
-
-setTimeout(()=>{
-    document.getElementById("heart").style.opacity = "1";
-},11500);
-
+/* CHISPITAS */
+document.addEventListener("click", e=>{
+for(let i=0;i<6;i++){
+let s=document.createElement("div");
+s.innerHTML="✨";
+s.style.position="fixed";
+s.style.left=e.clientX+"px";
+s.style.top=e.clientY+"px";
+s.style.fontSize="18px";
+s.style.animation="float 2s linear";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+}
+});
 </script>
 
 </body>
