@@ -9,104 +9,75 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;background:black;}
+body{background:black;overflow:hidden}
 
-video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;filter:brightness(.28);}
+/* VIDEO */
+video{position:fixed;width:100%;height:100%;object-fit:cover;filter:brightness(.28);z-index:-3;}
 .overlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:-2;}
 
-.phone{width:270px;height:540px;background:#111b21ee;backdrop-filter:blur(5px);border-radius:38px;overflow:hidden;position:relative;box-shadow:0 0 40px rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.08);}
-.notch{width:110px;height:24px;background:black;position:absolute;top:10px;left:50%;transform:translateX(-50%);border-radius:20px;z-index:5;}
+/* PANTALLA INICIO */
+.start{
+position:fixed;width:100%;height:100%;
+display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+background:black;color:white;z-index:100;
+cursor:pointer;text-align:center;
+}
+.start h1{font-size:32px;margin-bottom:20px}
+.start p{opacity:.7}
+
+/* CELULAR */
+.phone{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+width:270px;height:540px;background:#111b21ee;border-radius:38px;overflow:hidden;box-shadow:0 0 40px rgba(0,0,0,.6);display:none;}
 .header{height:70px;background:#202c33;display:flex;align-items:center;padding:18px;padding-top:28px;gap:10px;color:white;}
-
 .avatar{width:40px;height:40px;border-radius:50%;background:url('image.png');background-size:cover;background-position:center;border:2px solid rgba(255,255,255,.2);}
-
-.chat{height:calc(100% - 70px);padding:15px;overflow-y:auto;display:flex;flex-direction:column;scroll-behavior:smooth;}
-.message{padding:12px 14px;border-radius:16px;margin-top:10px;max-width:82%;line-height:1.6;font-size:12px;color:white;animation:fade .6s;}
+.chat{height:calc(100% - 70px);padding:15px;overflow-y:auto;display:flex;flex-direction:column;}
+.message{padding:12px 14px;border-radius:16px;margin-top:10px;max-width:82%;color:white;font-size:12px;animation:fade .6s;}
 .received{background:#202c33;align-self:flex-start;}
 .sent{background:#005c4b;align-self:flex-end;}
 
-.nextBtn{position:fixed;bottom:40px;right:40px;width:60px;height:60px;border:none;border-radius:50%;background:#00a884;color:white;font-size:24px;cursor:pointer;box-shadow:0 0 25px rgba(0,0,0,.5);z-index:20;}
+.nextBtn{position:fixed;bottom:40px;right:40px;width:60px;height:60px;border:none;border-radius:50%;background:#00a884;color:white;font-size:24px;cursor:pointer;display:none;z-index:20;}
 
 @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
 
-/* PANTALLA FINAL */
-.final{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-opacity:0;
-pointer-events:none;
-transition:1.5s;
-z-index:50;
-}
+/* FINAL */
+.final{position:fixed;width:100%;height:100%;background:black;display:flex;flex-direction:column;justify-content:center;align-items:center;opacity:0;transition:2s;pointer-events:none;z-index:50;}
+.final.show{opacity:1;pointer-events:auto;}
+.final img{width:260px;border-radius:25px;box-shadow:0 0 40px rgba(255,255,255,.2);margin-bottom:30px;animation:zoom 2s;}
+.bigText{color:white;font-size:28px;text-align:center;max-width:500px;line-height:1.5;}
 
-.final.show{
-opacity:1;
-pointer-events:auto;
-}
-
-.final img{
-width:260px;
-border-radius:25px;
-box-shadow:0 0 40px rgba(255,255,255,.2);
-margin-bottom:30px;
-animation:zoom 2s ease;
-}
-
-@keyframes zoom{
-from{transform:scale(.6);opacity:0;}
-to{transform:scale(1);opacity:1;}
-}
-
-.bigText{
-color:white;
-font-size:28px;
-text-align:center;
-max-width:500px;
-line-height:1.5;
-animation:fade 3s;
-}
+@keyframes zoom{from{transform:scale(.6);opacity:0;}to{transform:scale(1);opacity:1;}}
 
 /* CORAZONES */
-.heart{
-position:absolute;
-color:#ff4d6d;
-font-size:22px;
-animation:float 6s linear infinite;
-}
-
-@keyframes float{
-from{transform:translateY(100vh);opacity:1;}
-to{transform:translateY(-10vh);opacity:0;}
-}
+.heart{position:absolute;color:#ff4d6d;font-size:22px;animation:float 6s linear infinite;}
+@keyframes float{from{transform:translateY(100vh);}to{transform:translateY(-10vh);opacity:0;}}
 </style>
 </head>
 
 <body>
 
-<video id="video" autoplay muted loop playsinline>
+<video id="video" autoplay muted loop>
 <source src="video.mp4" type="video/mp4">
 </video>
-
 <div class="overlay"></div>
 
-<div class="phone">
-<div class="notch"></div>
-<div class="header">
-<div class="avatar"></div>
-<div style="font-size:15px;font-weight:500;">Paula ❤️</div>
+<audio id="music" loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INICIO -->
+<div class="start" onclick="startApp()">
+<h1>Hey Paula ✨</h1>
+<p>Toca la pantalla… prometo devolverte algo bonito ❤️</p>
 </div>
 
-<div class="chat" id="chat">
-<div class="message received">Hola Paula ✨</div>
+<!-- CELULAR -->
+<div class="phone" id="phone">
+<div class="header">
+<div class="avatar"></div>
+<div>Paula ❤️</div>
 </div>
+<div class="chat" id="chat"></div>
 </div>
 
 <button class="nextBtn" id="btn" onclick="nextMessage()">➜</button>
@@ -121,30 +92,34 @@ Me encantas muchísimo ❤️<br><br>
 </div>
 
 <script>
-const video=document.getElementById('video');
-document.body.addEventListener('click',()=>{video.muted=false;video.play();},{once:true});
-
 const mensajes=[
 "Quería decirte algo... ❤️",
 "No sabía muy bien cómo hacerlo.",
 "Así que preferí crear este pequeño lugar para ti ✨",
 "Porque hay personas que llegan normal...",
-"y poco a poco terminan volviéndose especiales 🌙",
+"y poco a poco se vuelven especiales 🌙",
 "Y honestamente...",
 "creo que contigo me pasó eso ❤️",
 "Me gusta hablar contigo.",
 "Me gusta cuando apareces en mi pantalla ✨",
-"Y también la tranquilidad que transmites.",
+"Y la tranquilidad que transmites.",
 "Solo quería que supieras...",
 "que alguien aquí te piensa bonito 🌹"
 ];
 
 let index=0;
 
+function startApp(){
+document.querySelector('.start').style.display='none';
+document.getElementById('phone').style.display='block';
+document.getElementById('btn').style.display='block';
+document.getElementById('video').muted=false;
+document.getElementById('music').play();
+}
+
 function nextMessage(){
 if(index<mensajes.length){
-const chat=document.getElementById('chat');
-const div=document.createElement('div');
+let div=document.createElement('div');
 div.classList.add('message');
 index%2==0?div.classList.add('sent'):div.classList.add('received');
 div.innerHTML=mensajes[index];
@@ -152,13 +127,8 @@ chat.appendChild(div);
 chat.scrollTop=chat.scrollHeight;
 index++;
 }else{
-document.getElementById("btn").style.display="none";
-document.getElementById("final").classList.add("show");
-crearCorazones();
-}
-}
-
-function crearCorazones(){
+btn.style.display='none';
+final.classList.add('show');
 for(let i=0;i<40;i++){
 let h=document.createElement("div");
 h.className="heart";
@@ -166,6 +136,7 @@ h.innerHTML="❤";
 h.style.left=Math.random()*100+"vw";
 h.style.animationDuration=(3+Math.random()*4)+"s";
 document.body.appendChild(h);
+}
 }
 }
 </script>
