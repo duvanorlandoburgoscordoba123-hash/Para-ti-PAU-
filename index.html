@@ -5,76 +5,86 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Para Paula ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{
-height:100vh;display:flex;justify-content:center;align-items:center;
-overflow:hidden;background:black;
-}
+body{height:100vh;display:flex;justify-content:center;align-items:center;overflow:hidden;background:black;}
 
-/* VIDEO */
-video{
-position:fixed;top:0;left:0;width:100%;height:100%;
-object-fit:cover;z-index:-3;filter:brightness(0.28);
-}
-.overlay{
-position:fixed;width:100%;height:100%;
-background:rgba(0,0,0,0.4);z-index:-2;
-}
+video{position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-3;filter:brightness(.28);}
+.overlay{position:fixed;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:-2;}
 
-/* CELULAR */
-.phone{
-width:270px;height:540px;background:#111b21ee;
-backdrop-filter:blur(5px);border-radius:38px;
-overflow:hidden;position:relative;
-box-shadow:0 0 40px rgba(0,0,0,0.6);
-border:2px solid rgba(255,255,255,0.08);
-}
-.notch{
-width:110px;height:24px;background:black;
-position:absolute;top:10px;left:50%;
-transform:translateX(-50%);border-radius:20px;z-index:5;
-}
-.header{
-height:70px;background:#202c33;
-display:flex;align-items:center;
-padding:18px;padding-top:28px;gap:10px;color:white;
-}
+.phone{width:270px;height:540px;background:#111b21ee;backdrop-filter:blur(5px);border-radius:38px;overflow:hidden;position:relative;box-shadow:0 0 40px rgba(0,0,0,.6);border:2px solid rgba(255,255,255,.08);}
+.notch{width:110px;height:24px;background:black;position:absolute;top:10px;left:50%;transform:translateX(-50%);border-radius:20px;z-index:5;}
+.header{height:70px;background:#202c33;display:flex;align-items:center;padding:18px;padding-top:28px;gap:10px;color:white;}
 
-/* FOTO PERFIL ACTUALIZADA */
-.avatar{
-width:40px;height:40px;border-radius:50%;
-background-image:url('image.png');
-background-size:cover;background-position:center;
-border:2px solid rgba(255,255,255,0.2);
-}
+.avatar{width:40px;height:40px;border-radius:50%;background:url('image.png');background-size:cover;background-position:center;border:2px solid rgba(255,255,255,.2);}
 
-.chat{
-height:calc(100% - 70px);padding:15px;
-overflow-y:auto;display:flex;flex-direction:column;
-scroll-behavior:smooth;
-}
-.message{
-padding:12px 14px;border-radius:16px;margin-top:10px;
-max-width:82%;line-height:1.6;font-size:12px;color:white;
-animation:fade 0.6s ease;
-}
+.chat{height:calc(100% - 70px);padding:15px;overflow-y:auto;display:flex;flex-direction:column;scroll-behavior:smooth;}
+.message{padding:12px 14px;border-radius:16px;margin-top:10px;max-width:82%;line-height:1.6;font-size:12px;color:white;animation:fade .6s;}
 .received{background:#202c33;align-self:flex-start;}
 .sent{background:#005c4b;align-self:flex-end;}
 
-.nextBtn{
-position:fixed;bottom:40px;right:40px;width:60px;height:60px;
-border:none;border-radius:50%;background:#00a884;color:white;
-font-size:24px;cursor:pointer;box-shadow:0 0 25px rgba(0,0,0,0.5);
-transition:0.3s;z-index:20;
-}
-.nextBtn:hover{transform:scale(1.08);}
+.nextBtn{position:fixed;bottom:40px;right:40px;width:60px;height:60px;border:none;border-radius:50%;background:#00a884;color:white;font-size:24px;cursor:pointer;box-shadow:0 0 25px rgba(0,0,0,.5);z-index:20;}
 
-@keyframes fade{
-from{opacity:0;transform:translateY(12px);}
-to{opacity:1;transform:translateY(0);}
+@keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* PANTALLA FINAL */
+.final{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+opacity:0;
+pointer-events:none;
+transition:1.5s;
+z-index:50;
+}
+
+.final.show{
+opacity:1;
+pointer-events:auto;
+}
+
+.final img{
+width:260px;
+border-radius:25px;
+box-shadow:0 0 40px rgba(255,255,255,.2);
+margin-bottom:30px;
+animation:zoom 2s ease;
+}
+
+@keyframes zoom{
+from{transform:scale(.6);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+.bigText{
+color:white;
+font-size:28px;
+text-align:center;
+max-width:500px;
+line-height:1.5;
+animation:fade 3s;
+}
+
+/* CORAZONES */
+.heart{
+position:absolute;
+color:#ff4d6d;
+font-size:22px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+from{transform:translateY(100vh);opacity:1;}
+to{transform:translateY(-10vh);opacity:0;}
 }
 </style>
 </head>
@@ -89,7 +99,6 @@ to{opacity:1;transform:translateY(0);}
 
 <div class="phone">
 <div class="notch"></div>
-
 <div class="header">
 <div class="avatar"></div>
 <div style="font-size:15px;font-weight:500;">Paula ❤️</div>
@@ -100,27 +109,32 @@ to{opacity:1;transform:translateY(0);}
 </div>
 </div>
 
-<button class="nextBtn" onclick="nextMessage()">➜</button>
+<button class="nextBtn" id="btn" onclick="nextMessage()">➜</button>
+
+<!-- FINAL -->
+<div class="final" id="final">
+<img src="image.png">
+<div class="bigText">
+Me encantas muchísimo ❤️<br><br>
+¿Te gustaría salir conmigo? 🌹
+</div>
+</div>
 
 <script>
 const video=document.getElementById('video');
-document.body.addEventListener('click',()=>{
-video.muted=false;video.play();
-},{once:true});
+document.body.addEventListener('click',()=>{video.muted=false;video.play();},{once:true});
 
 const mensajes=[
 "Quería decirte algo... ❤️",
 "No sabía muy bien cómo hacerlo.",
 "Así que preferí crear este pequeño lugar para ti ✨",
 "Porque hay personas que llegan normal...",
-"y poco a poco terminan volviéndose especiales sin darse cuenta 🌙",
+"y poco a poco terminan volviéndose especiales 🌙",
 "Y honestamente...",
 "creo que contigo me pasó eso ❤️",
 "Me gusta hablar contigo.",
 "Me gusta cuando apareces en mi pantalla ✨",
-"Y también me gusta la tranquilidad que transmites.",
-"No hice esto para presionarte.",
-"Ni para pedirte respuestas.",
+"Y también la tranquilidad que transmites.",
 "Solo quería que supieras...",
 "que alguien aquí te piensa bonito 🌹"
 ];
@@ -138,7 +152,20 @@ chat.appendChild(div);
 chat.scrollTop=chat.scrollHeight;
 index++;
 }else{
-document.querySelector('.nextBtn').style.display="none";
+document.getElementById("btn").style.display="none";
+document.getElementById("final").classList.add("show");
+crearCorazones();
+}
+}
+
+function crearCorazones(){
+for(let i=0;i<40;i++){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(3+Math.random()*4)+"s";
+document.body.appendChild(h);
 }
 }
 </script>
