@@ -2,42 +2,67 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Mensajes Animados</title>
+<title>Chat animado</title>
 
 <style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 body{
-    background:#0f172a;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* CONTENEDOR CHAT */
+.chat-container{
+    width:340px;
+    height:520px;
+    background:#111827;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 0 30px rgba(0,0,0,.6);
+    overflow:hidden;
 }
 
 .chat{
-    width:320px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
 }
 
+/* BURBUJAS */
 .bubble{
-    background:#22c55e;
-    color:white;
     padding:12px 16px;
     border-radius:18px;
-    margin:10px 0;
     width:max-content;
     max-width:80%;
     opacity:0;
-    transform:translateY(20px);
-    animation:aparecer 0.6s forwards;
+    transform:translateY(30px);
+    animation:aparecer .6s forwards;
     
-    /* 🔥 IMPORTANTE: evita separación de letras */
+    /* 🔥 evita espacios raros entre letras */
     letter-spacing: normal;
     word-spacing: normal;
     white-space: normal;
 }
 
-.bubble:nth-child(2){
-    animation-delay:2s;
+.yo{
+    background:#22c55e;
+    color:white;
+    align-self:flex-end;
+}
+
+.otro{
+    background:#374151;
+    color:white;
+    align-self:flex-start;
 }
 
 @keyframes aparecer{
@@ -46,19 +71,40 @@ body{
         transform:translateY(0);
     }
 }
+
+/* corazon final */
+.corazon{
+    font-size:40px;
+    text-align:center;
+    opacity:0;
+    animation:latido 1s infinite;
+    margin-top:10px;
+}
+
+@keyframes latido{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.2)}
+    100%{transform:scale(1)}
+}
 </style>
 </head>
 
 <body>
 
-<div class="chat">
-    <div class="bubble" id="msg1"></div>
-    <div class="bubble" id="msg2"></div>
+<div class="chat-container">
+    <div class="chat" id="chat"></div>
+    <div class="corazon" id="heart">❤️</div>
 </div>
 
 <script>
-const texto1 = "Si, un poema lindo";
-const texto2 = "Obvio, sí otro más lindo";
+const chat = document.getElementById("chat");
+
+function crearBurbuja(tipo){
+    const div = document.createElement("div");
+    div.className = "bubble " + tipo;
+    chat.appendChild(div);
+    return div;
+}
 
 function escribirTexto(elemento, texto, velocidad){
     let i = 0;
@@ -72,9 +118,41 @@ function escribirTexto(elemento, texto, velocidad){
     escribir();
 }
 
-// escribir mensajes con efecto typing
-setTimeout(()=> escribirTexto(document.getElementById("msg1"), texto1, 40), 500);
-setTimeout(()=> escribirTexto(document.getElementById("msg2"), texto2, 40), 2500);
+/* SECUENCIA DE MENSAJES */
+setTimeout(()=>{
+    let b1 = crearBurbuja("otro");
+    escribirTexto(b1,"Hola 😊",40);
+},500);
+
+setTimeout(()=>{
+    let b2 = crearBurbuja("yo");
+    escribirTexto(b2,"Hola 😍",40);
+},2000);
+
+setTimeout(()=>{
+    let b3 = crearBurbuja("otro");
+    escribirTexto(b3,"¿Me dices algo lindo?",40);
+},3500);
+
+setTimeout(()=>{
+    let b4 = crearBurbuja("yo");
+    escribirTexto(b4,"Si, un poema lindo",40);
+},5500);
+
+setTimeout(()=>{
+    let b5 = crearBurbuja("otro");
+    escribirTexto(b5,"Obvio, sí otro más lindo",40);
+},7500);
+
+setTimeout(()=>{
+    let b6 = crearBurbuja("yo");
+    escribirTexto(b6,"Eres lo más bonito que me ha pasado 💕",40);
+},9500);
+
+setTimeout(()=>{
+    document.getElementById("heart").style.opacity = "1";
+},11500);
+
 </script>
 
 </body>
