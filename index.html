@@ -1,4 +1,952 @@
-<!DOCTYPE html>
+ñtransition:0.3s;
+z-index:20;
+}
+
+.<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Paula ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:black;
+}
+
+/* VIDEO FONDO */
+
+video{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+filter:brightness(0.28);
+}
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+z-index:-2;
+}
+
+/* CELULAR */
+
+.phone{
+width:270px;
+height:540px;
+background:#111b21ee;
+backdrop-filter:blur(5px);
+border-radius:38px;
+overflow:hidden;
+position:relative;
+box-shadow:0 0 40px rgba(0,0,0,0.6);
+border:2px solid rgba(255,255,255,0.08);
+}
+
+/* NOTCH */
+
+.notch{
+width:110px;
+height:24px;
+background:black;
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+z-index:5;
+}
+
+/* HEADER */
+
+.header{
+height:70px;
+background:#202c33;
+display:flex;
+align-items:center;
+padding:18px;
+padding-top:28px;
+gap:10px;
+color:white;
+}
+
+/* IMAGEN ANIMADA */
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background-image:url('https://media.tenor.com/4f3Q4Q4iKxAAAAAC/anime-kiss.gif');
+background-size:cover;
+background-position:center;
+border:2px solid rgba(255,255,255,0.2);
+}
+
+.name{
+font-size:15px;
+font-weight:500;
+}
+
+/* CHAT */
+
+.chat{
+height:calc(100% - 70px);
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+scroll-behavior:smooth;
+}
+
+.message{
+padding:12px 14px;
+border-radius:16px;
+margin-top:10px;
+max-width:82%;
+line-height:1.6;
+font-size:12px;
+color:white;
+animation:fade 0.6s ease;
+}
+
+.received{
+background:#202c33;
+align-self:flex-start;
+}
+
+.sent{
+background:#005c4b;
+align-self:flex-end;
+}
+
+/* BOTON */
+
+.nextBtn{
+position:fixed;
+bottom:40px;
+right:40px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+background:#00a884;
+color:white;
+font-size:24px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+transition:0.3s;
+z-index:20;
+}
+
+.nextBtn:hover{
+transform:scale(1.08);
+}
+
+/* ANIMACION */
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<video id="video" autoplay muted loop playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="phone">
+
+<div class="notch"></div>
+
+<div class="header">
+
+<div class="avatar"></div>
+
+<div class="name">
+Paula ❤️
+</div>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="message received">
+Hola Paula ✨
+</div>
+
+</div>
+
+</div>
+
+<button class="nextBtn" onclick="nextMessage()">
+➜
+</button>
+
+<script>
+
+/* SONIDO */
+
+const video = document.getElementById('video');
+
+document.body.addEventListener('click', () => {
+
+video.muted = false;
+video.play();
+
+}, { once:true });
+
+/* MENSAJES */
+
+const mensajes = [
+
+"Quería decirte algo... ❤️",
+
+"No sabía muy bien cómo hacerlo.",
+
+"Así que preferí crear este pequeño lugar para ti ✨",
+
+"Porque hay personas que llegan normal...",
+
+"y poco a poco terminan volviéndose especiales sin darse cuenta 🌙",
+
+"Y honestamente...",
+
+"creo que contigo me pasó eso ❤️",
+
+"Me gusta hablar contigo.",
+
+"Me gusta cuando apareces en mi pantalla ✨",
+
+"Y también me gusta la tranquilidad que transmites.",
+
+"No hice esto para presionarte.",
+
+"Ni para pedirte respuestas.",
+
+"Solo quería que supieras...",
+
+"que alguien aquí te piensa bonito 🌹"
+
+];
+
+let index = 0;
+
+function nextMessage(){
+
+if(index < mensajes.length){
+
+const chat = document.getElementById('chat');
+
+const div = document.createElement('div');
+
+div.classList.add('message');
+
+if(index % 2 == 0){
+div.classList.add('sent');
+}else{
+div.classList.add('received');
+}
+
+div.innerHTML = mensajes[index];
+
+chat.appendChild(div);
+
+chat.scrollTop = chat.scrollHeight;
+
+index++;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>{
+transform:scale(1.08);
+}
+
+/* ANIMACION */
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<video id="video" autoplay muted loop playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="phone">
+
+<div class="notch"></div>
+
+<div class="header">
+
+<div class="avatar"></div>
+
+<div class="name">
+Paula ❤️
+</div>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="message received">
+Hola Paula ✨
+</div>
+
+</div>
+
+</div>
+
+<button class="nextBtn" onclick="nextMessage()">
+➜
+</button>
+
+<script>
+
+/* SONIDO */
+
+const video = document.getElementById('video');
+
+document.body.addEventListener('click', () => {
+
+video.muted = false;
+video.play();
+
+}, { once:true });
+
+/* MENSAJES */
+
+const mensajes = [
+
+"Quería decirte algo... ❤️",
+
+"No sabía muy bien cómo hacerlo.",
+
+"Así que preferí crear este pequeño lugar para ti ✨",
+
+"Porque hay personas que llegan normal...",
+
+"y poco a poco terminan volviéndose especiales sin darse cuenta 🌙",
+
+"Y honestamente...",
+
+"creo que contigo me pasó eso ❤️",
+
+"Me gusta hablar contigo.",
+
+"Me gusta cuando apareces en mi pantalla ✨",
+
+"Y también me gusta la tranquilidad que transmites.",
+
+"No hice esto para presionarte.",
+
+"Ni para pedirte respuestas.",
+
+"Solo quería que supieras...",
+
+"que alguien aquí te piensa bonito 🌹"
+
+];
+
+let index = 0;
+
+function nextMessage(){
+
+if(index < mensajes.length){
+
+const chat = document.getElementById('chat');
+
+const div = document.createElement('div');
+
+div.classList.add('message');
+
+if(index % 2 == 0){
+div.classList.add('sent');
+}else{
+div.classList.add('received');
+}
+
+div.innerHTML = mensajes[index];
+
+chat.appendChild(div);
+
+chat.scrollTop = chat.scrollHeight;
+
+index++;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>;
+border-radius:20px;
+z-index:5;
+}
+
+/* HEADER */
+
+.header{
+height:70px;
+background:#202c33;
+display:flex;
+align-items:center;
+padding:18px;
+padding-top:28px;
+gap:10px;
+color:white;
+}
+
+/* IMAGEN ANIMADA */
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background-image:url('https://media.tenor.com/4f3Q4Q4iKxAAAAAC/anime-kiss.gif');
+background-size:cover;
+background-position:center;
+border:2px solid rgba(255,255,255,0.2);
+}
+
+.name{
+font-size:15px;
+font-weight:500;
+}
+
+/* CHAT */
+
+.chat{
+height:calc(100% - 70px);
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+scroll-behavior:smooth;
+}
+
+.message{
+padding:12px 14px;
+border-radius:16px;
+margin-top:10px;
+max-width:82%;
+line-height:1.6;
+font-size:12px;
+color:white;
+animation:fade 0.6s ease;
+}
+
+.received{
+background:#202c33;
+align-self:flex-start;
+}
+
+.sent{
+background:#005c4b;
+align-self:flex-end;
+}
+
+/* BOTON */
+
+.nextBtn{
+position:fixed;
+bottom:40px;
+right:40px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+background:#00a884;
+color:white;
+font-size:24px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+transition:0.3s;
+z-index:20;
+}
+
+.nextBtn:hover{
+transform:scale(1.08);
+}
+
+/* ANIMACION */
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<video id="video" autoplay muted loop playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="phone">
+
+<div class="notch"></div>
+
+<div class="header">
+
+<div class="avatar"></div>
+
+<div class="name">
+Paula ❤️
+</div>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="message received">
+Hola Paula ✨
+</div>
+
+</div>
+
+</div>
+
+<button class="nextBtn" onclick="nextMessage()">
+➜
+</button>
+
+<script>
+
+/* SONIDO */
+
+const video = document.getElementById('video');
+
+document.body.addEventListener('click', () => {
+
+video.muted = false;
+video.play();
+
+}, { once:true });
+
+/* MENSAJES */
+
+const mensajes = [
+
+"Quería decirte algo... ❤️",
+
+"No sabía muy bien cómo hacerlo.",
+
+"Así que preferí crear este pequeño lugar para ti ✨",
+
+"Porque hay personas que llegan normal...",
+
+"y poco a poco terminan volviéndose especiales sin darse cuenta 🌙",
+
+"Y honestamente...",
+
+"creo que contigo me pasó eso ❤️",
+
+"Me gusta hablar contigo.",
+
+"Me gusta cuando apareces en mi pantalla ✨",
+
+"Y también me gusta la tranquilidad que transmites.",
+
+"No hice esto para presionarte.",
+
+"Ni para pedirte respuestas.",
+
+"Solo quería que supieras...",
+
+"que alguien aquí te piensa bonito 🌹"
+
+];
+
+let index = 0;
+
+function nextMessage(){
+
+if(index < mensajes.length){
+
+const chat = document.getElementById('chat');
+
+const div = document.createElement('div');
+
+div.classList.add('message');
+
+if(index % 2 == 0){
+div.classList.add('sent');
+}else{
+div.classList.add('received');
+}
+
+div.innerHTML = mensajes[index];
+
+chat.appendChild(div);
+
+chat.scrollTop = chat.scrollHeight;
+
+index++;
+
+}
+
+}
+
+</script>
+
+</body>
+</html> html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Paula ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:black;
+}
+
+/* VIDEO FONDO */
+
+video{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
+filter:brightness(0.28);
+}
+
+.overlay{
+position:fixed;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.4);
+z-index:-2;
+}
+
+/* CELULAR */
+
+.phone{
+width:270px;
+height:540px;
+background:#111b21ee;
+backdrop-filter:blur(5px);
+border-radius:38px;
+overflow:hidden;
+position:relative;
+box-shadow:0 0 40px rgba(0,0,0,0.6);
+border:2px solid rgba(255,255,255,0.08);
+}
+
+/* NOTCH */
+
+.notch{
+width:110px;
+height:24px;
+background:black;
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+z-index:5;
+}
+
+/* HEADER */
+
+.header{
+height:70px;
+background:#202c33;
+display:flex;
+align-items:center;
+padding:18px;
+padding-top:28px;
+gap:10px;
+color:white;
+}
+
+/* IMAGEN ANIMADA */
+
+.avatar{
+width:40px;
+height:40px;
+border-radius:50%;
+background-image:url('https://media.tenor.com/4f3Q4Q4iKxAAAAAC/anime-kiss.gif');
+background-size:cover;
+background-position:center;
+border:2px solid rgba(255,255,255,0.2);
+}
+
+.name{
+font-size:15px;
+font-weight:500;
+}
+
+/* CHAT */
+
+.chat{
+height:calc(100% - 70px);
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+scroll-behavior:smooth;
+}
+
+.message{
+padding:12px 14px;
+border-radius:16px;
+margin-top:10px;
+max-width:82%;
+line-height:1.6;
+font-size:12px;
+color:white;
+animation:fade 0.6s ease;
+}
+
+.received{
+background:#202c33;
+align-self:flex-start;
+}
+
+.sent{
+background:#005c4b;
+align-self:flex-end;
+}
+
+/* BOTON */
+
+.nextBtn{
+position:fixed;
+bottom:40px;
+right:40px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+background:#00a884;
+color:white;
+font-size:24px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
+transition:0.3s;
+z-index:20;
+}
+
+.nextBtn:hover{
+transform:scale(1.08);
+}
+
+/* ANIMACION */
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(12px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<video id="video" autoplay muted loop playsinline>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="phone">
+
+<div class="notch"></div>
+
+<div class="header">
+
+<div class="avatar"></div>
+
+<div class="name">
+Paula ❤️
+</div>
+
+</div>
+
+<div class="chat" id="chat">
+
+<div class="message received">
+Hola Paula ✨
+</div>
+
+</div>
+
+</div>
+
+<button class="nextBtn" onclick="nextMessage()">
+➜
+</button>
+
+<script>
+
+/* SONIDO */
+
+const video = document.getElementById('video');
+
+document.body.addEventListener('click', () => {
+
+video.muted = false;
+video.play();
+
+}, { once:true });
+
+/* MENSAJES */
+
+const mensajes = [
+
+"Quería decirte algo... ❤️",
+
+"No sabía muy bien cómo hacerlo.",
+
+"Así que preferí crear este pequeño lugar para ti ✨",
+
+"Porque hay personas que llegan normal...",
+
+"y poco a poco terminan volviéndose especiales sin darse cuenta 🌙",
+
+"Y honestamente...",
+
+"creo que contigo me pasó eso ❤️",
+
+"Me gusta hablar contigo.",
+
+"Me gusta cuando apareces en mi pantalla ✨",
+
+"Y también me gusta la tranquilidad que transmites.",
+
+"No hice esto para presionarte.",
+
+"Ni para pedirte respuestas.",
+
+"Solo quería que supieras...",
+
+"que alguien aquí te piensa bonito 🌹"
+
+];
+
+let index = 0;
+
+function nextMessage(){
+
+if(index < mensajes.length){
+
+const chat = document.getElementById('chat');
+
+const div = document.createElement('div');
+
+div.classList.add('message');
+
+if(index % 2 == 0){
+div.classList.add('sent');
+}else{
+div.classList.add('received');
+}
+
+div.innerHTML = mensajes[index];
+
+chat.appendChild(div);
+
+chat.scrollTop = chat.scrollHeight;
+
+index++;
+
+}
+
+}
+
+</script>
+
+</body>
+</html> html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
