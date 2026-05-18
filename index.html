@@ -25,43 +25,46 @@ overflow:hidden;
 background:black;
 }
 
-/* VIDEO */
+/* VIDEO FONDO */
 
 video{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 object-fit:cover;
 z-index:-3;
-filter:brightness(0.25);
+filter:brightness(0.28);
 }
 
 .overlay{
 position:fixed;
 width:100%;
 height:100%;
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.4);
 z-index:-2;
 }
 
-/* CELULAR */
+/* CELULAR PEQUEÑO */
 
 .phone{
-width:320px;
-height:650px;
-background:#111b21;
-border-radius:40px;
+width:270px;
+height:540px;
+background:#111b21ee;
+backdrop-filter:blur(5px);
+border-radius:38px;
 overflow:hidden;
 position:relative;
 box-shadow:0 0 40px rgba(0,0,0,0.6);
-border:4px solid rgba(255,255,255,0.08);
+border:2px solid rgba(255,255,255,0.08);
 }
 
 /* NOTCH */
 
 .notch{
-width:140px;
-height:28px;
+width:110px;
+height:24px;
 background:black;
 position:absolute;
 top:10px;
@@ -74,19 +77,19 @@ z-index:5;
 /* HEADER */
 
 .header{
-height:75px;
+height:70px;
 background:#202c33;
 display:flex;
 align-items:center;
-padding:20px;
-padding-top:30px;
-gap:12px;
+padding:18px;
+padding-top:28px;
+gap:10px;
 color:white;
 }
 
 .avatar{
-width:45px;
-height:45px;
+width:38px;
+height:38px;
 border-radius:50%;
 background-image:url('https://i.imgur.com/8Km9tLL.jpg');
 background-size:cover;
@@ -94,15 +97,15 @@ background-position:center;
 }
 
 .name{
-font-size:17px;
+font-size:15px;
 font-weight:500;
 }
 
 /* CHAT */
 
 .chat{
-height:calc(100% - 75px);
-padding:20px;
+height:calc(100% - 70px);
+padding:15px;
 overflow-y:auto;
 display:flex;
 flex-direction:column;
@@ -110,14 +113,14 @@ scroll-behavior:smooth;
 }
 
 .message{
-padding:14px 16px;
-border-radius:18px;
-margin-top:12px;
+padding:12px 14px;
+border-radius:16px;
+margin-top:10px;
 max-width:82%;
-line-height:1.7;
-font-size:14px;
+line-height:1.6;
+font-size:12px;
 color:white;
-animation:fade 0.7s ease;
+animation:fade 0.6s ease;
 }
 
 .received{
@@ -130,35 +133,35 @@ background:#005c4b;
 align-self:flex-end;
 }
 
-/* BOTON */
+/* BOTON AFUERA */
 
 .nextBtn{
 position:fixed;
-bottom:35px;
-right:30px;
-width:65px;
-height:65px;
+bottom:40px;
+right:40px;
+width:60px;
+height:60px;
 border:none;
 border-radius:50%;
 background:#00a884;
 color:white;
-font-size:28px;
+font-size:24px;
 cursor:pointer;
 box-shadow:0 0 25px rgba(0,0,0,0.5);
 transition:0.3s;
-z-index:10;
+z-index:20;
 }
 
 .nextBtn:hover{
 transform:scale(1.08);
 }
 
-/* ANIMACIONES */
+/* ANIMACION */
 
 @keyframes fade{
 from{
 opacity:0;
-transform:translateY(15px);
+transform:translateY(12px);
 }
 to{
 opacity:1;
@@ -202,12 +205,12 @@ Hola Paula ✨
 </div>
 
 <button class="nextBtn" onclick="nextMessage()">
-➤
+➜
 </button>
 
 <script>
 
-/* ACTIVAR SONIDO */
+/* SONIDO */
 
 const video = document.getElementById('video');
 
@@ -286,3 +289,5 @@ index++;
 
 </body>
 </html>
+
+
