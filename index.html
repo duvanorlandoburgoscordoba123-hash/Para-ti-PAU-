@@ -17,12 +17,12 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#0b141a;
 height:100vh;
-overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
+overflow:hidden;
+background:black;
 }
 
 video{
@@ -30,8 +30,8 @@ position:fixed;
 width:100%;
 height:100%;
 object-fit:cover;
-z-index:-2;
-filter:brightness(0.3);
+z-index:-3;
+filter:brightness(0.25);
 }
 
 .overlay{
@@ -39,29 +39,88 @@ position:fixed;
 width:100%;
 height:100%;
 background:rgba(0,0,0,0.45);
-z-index:-1;
+z-index:-2;
 }
 
+/* CELULAR */
+
+.phone{
+width:360px;
+height:720px;
+background:#111b21;
+border-radius:40px;
+overflow:hidden;
+position:relative;
+box-shadow:0 0 40px rgba(0,0,0,0.6);
+border:4px solid rgba(255,255,255,0.08);
+}
+
+/* NOTCH */
+
+.notch{
+width:140px;
+height:28px;
+background:black;
+position:absolute;
+top:10px;
+left:50%;
+transform:translateX(-50%);
+border-radius:20px;
+z-index:5;
+}
+
+/* HEADER */
+
+.header{
+height:75px;
+background:#202c33;
+display:flex;
+align-items:center;
+padding:20px;
+padding-top:30px;
+gap:12px;
+color:white;
+}
+
+.avatar{
+width:45px;
+height:45px;
+border-radius:50%;
+background-image:url('https://i.imgur.com/8Km9tLL.jpg');
+background-size:cover;
+background-position:center;
+}
+
+.name{
+font-size:17px;
+font-weight:500;
+}
+
+/* CHAT */
+
 .chat{
-width:100%;
-max-width:420px;
-height:100vh;
+height:calc(100% - 75px);
+padding:20px;
+overflow-y:auto;
 display:flex;
 flex-direction:column;
-padding:20px;
-justify-content:flex-end;
+scroll-behavior:smooth;
 }
 
 .message{
-background:#202c33;
-color:white;
-padding:16px;
+padding:14px 16px;
 border-radius:18px;
 margin-top:12px;
-line-height:1.8;
-font-size:15px;
-max-width:85%;
-animation:fade 0.8s ease;
+max-width:82%;
+line-height:1.7;
+font-size:14px;
+color:white;
+animation:fade 0.7s ease;
+}
+
+.received{
+background:#202c33;
+align-self:flex-start;
 }
 
 .sent{
@@ -69,17 +128,19 @@ background:#005c4b;
 align-self:flex-end;
 }
 
+/* BOTON */
+
 .nextBtn{
 position:absolute;
-bottom:35px;
-right:25px;
-width:60px;
-height:60px;
+bottom:25px;
+right:20px;
+width:58px;
+height:58px;
 border:none;
 border-radius:50%;
 background:#00a884;
 color:white;
-font-size:26px;
+font-size:24px;
 cursor:pointer;
 box-shadow:0 0 20px rgba(0,0,0,0.4);
 transition:0.3s;
@@ -88,6 +149,8 @@ transition:0.3s;
 .nextBtn:hover{
 transform:scale(1.08);
 }
+
+/* ANIMACIONES */
 
 @keyframes fade{
 from{
@@ -111,9 +174,23 @@ transform:translateY(0);
 
 <div class="overlay"></div>
 
+<div class="phone">
+
+<div class="notch"></div>
+
+<div class="header">
+
+<div class="avatar"></div>
+
+<div class="name">
+Paula ❤️
+</div>
+
+</div>
+
 <div class="chat" id="chat">
 
-<div class="message">
+<div class="message received">
 Hola Paula ✨
 </div>
 
@@ -122,6 +199,8 @@ Hola Paula ✨
 <button class="nextBtn" onclick="nextMessage()">
 ➜
 </button>
+
+</div>
 
 <script>
 
@@ -148,13 +227,13 @@ const mensajes = [
 
 "Y honestamente...",
 
-"creo que contigo me pasó eso.",
+"creo que contigo me pasó eso ❤️",
 
 "Me gusta hablar contigo.",
 
 "Me gusta cuando apareces en mi pantalla ✨",
 
-"Y también me gusta la tranquilidad que transmites ❤️",
+"Y también me gusta la tranquilidad que transmites.",
 
 "No hice esto para presionarte.",
 
@@ -180,6 +259,8 @@ div.classList.add('message');
 
 if(index % 2 == 0){
 div.classList.add('sent');
+}else{
+div.classList.add('received');
 }
 
 div.innerHTML = mensajes[index];
@@ -198,5 +279,3 @@ index++;
 
 </body>
 </html>
-
-
