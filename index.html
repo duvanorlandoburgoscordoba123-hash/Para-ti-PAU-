@@ -27,7 +27,7 @@ video{position:fixed;width:100%;height:100%;object-fit:cover;filter:brightness(.
 .chat{height:calc(100% - 70px);padding:15px;overflow-y:auto;display:flex;flex-direction:column;}
 .message{
 padding:12px 14px;border-radius:16px;margin-top:10px;max-width:82%;
-color:white;font-size:12px;letter-spacing:0;word-spacing:0;white-space:normal;
+color:white;font-size:12px;letter-spacing:0;word-spacing:0;
 }
 .received{background:#202c33;align-self:flex-start;}
 .sent{background:#005c4b;align-self:flex-end;}
@@ -92,6 +92,7 @@ const mensajes=[
 
 let index=0;
 const msgSound=document.getElementById("msgSound");
+const chat=document.getElementById("chat");
 
 function startApp(){
 document.querySelector('.start').style.display='none';
@@ -101,23 +102,29 @@ video.muted=false;
 music.play();
 }
 
-/* escritura perfecta */
+function bajarScroll(){
+chat.scrollTop = chat.scrollHeight;
+}
+
 function escribirMensaje(texto, elemento){
 elemento.textContent="";
 let i=0;
 let intervalo=setInterval(()=>{
 elemento.textContent += texto[i];
 i++;
+bajarScroll();
 if(i>=texto.length) clearInterval(intervalo);
 },30);
 }
 
 function nextMessage(){
 if(index<mensajes.length){
+
 let div=document.createElement('div');
 div.classList.add('message');
 index%2==0?div.classList.add('sent'):div.classList.add('received');
 chat.appendChild(div);
+
 msgSound.play();
 escribirMensaje(mensajes[index],div);
 
@@ -127,11 +134,13 @@ t.className="time";
 t.innerHTML=hora;
 div.appendChild(t);
 
-chat.scrollTop=chat.scrollHeight;
+bajarScroll();
 index++;
+
 }else{
 btn.style.display='none';
 final.classList.add('show');
+
 setTimeout(()=>{
 finalText.innerHTML="Desde que llegaste todo se siente más bonito ❤️<br><br>¿Te gustaría salir conmigo? 🌹";
 },3000);
